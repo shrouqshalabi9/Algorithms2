@@ -1,0 +1,36 @@
+#include <iostream>
+#include <chrono> // For high_resolution_clock and duration_cast
+
+using namespace std;
+using namespace chrono;
+
+// Function to calculate factorial using recursion
+long long factorial(int n) {
+    if (n <= 1)  // Base case: factorial of 0 or 1 is 1
+        return 1;
+    return n * factorial(n - 1);  // Recursive call
+}
+
+int main() {
+    int num;
+    cout << "Enter a positive integer: ";
+    cin >> num;
+
+    if (num < 0) {
+        cout << "Factorial is not defined for negative numbers." << endl;
+    } else {
+        // Start timing factorial calculation
+        auto start = high_resolution_clock::now();
+        long long result = factorial(num);
+        auto end = high_resolution_clock::now();
+
+        // Calculate elapsed time in nanoseconds
+        double elapsedTime = duration_cast<nanoseconds>(end - start).count();
+
+        // Print the result and time taken
+        cout << "Factorial of " << num << " is " << result << endl;
+        cout << "Time taken to calculate factorial: " << elapsedTime << " nanoseconds" << endl;
+    }
+
+    return 0;
+}
